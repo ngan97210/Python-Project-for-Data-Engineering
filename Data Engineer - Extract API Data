@@ -1,0 +1,18 @@
+import requests
+import pandas as pd
+
+# Write your code here
+url = "http://api.exchangeratesapi.io/v1/latest?base=EUR&access_key=3ae8a41ae8b314fe2c76abee00969ef2"  #Make sure to change ******* to your API key.
+response = requests.get(url)
+response.json()
+
+# Turn the data into a dataframe
+dataframe = pd.DataFrame(response.json())
+dataframe
+
+# Drop unnescessary columns
+dataframe.drop(columns=["success", "timestamp", "base", "date"], inplace=True)
+dataframe
+
+# Save the Dataframe
+dataframe.to_csv("/home/ngan97210/Documents//DataEngineerIBM/Course3/exchange_rates_1.csv")
